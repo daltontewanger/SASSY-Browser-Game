@@ -1,10 +1,10 @@
 # Browser Game Project
 -- Inspiration for this game comes from one of my favorite/old flash games from Neopets called "Jelly Blobs of Doom"
 
-## Goal is to use the gaming library Phaser.io to help with the handling of the physcis within the project
+## Goal is to use the gaming library Phaser.io to help with the handling of the physics within the project
 
 ## There will be a playable character that can move around with arrow keys within a playable area
-  - The character will start at a simple size of 10 by 10 px for example and in the center of the screen/playable area
+  - The character will start at a simple size of 16 by 16 px for example and in the center of the screen/playable area
 
 ## There will be objects that can come from any side of the screen/playable area and move directly to the other side in a straight line
   - these objects will vary in speed to add difficulty (if possible)
