@@ -9,7 +9,61 @@
         <link rel="stylesheet" href="main.css">
         <script src="https://cdn.jsdelivr.net/npm/phaser@3.70.0/dist/phaser.min.js"></script>
     </head>
-    <body>      
+    <body>
+        <main id="container">
+            <section id="gameContainer">
+              <h1 id="gameTitle">Run Eat Run!</h1>
+              <button id="playButton" class="button" onclick="startGame()">
+                Play Game
+              </button>
+              <button
+                id="instructionsButton"
+                class="button"
+                onclick="showInstructions()"
+              >
+                Instructions
+              </button>
+              <section id="instructionsContainer">
+                <div id="instructionsText">
+                  <h2>Welcome to the Strawberry Kingdom!</h2>
+                  <h3>Objective:</h3>
+                  <p>
+                    Once upon a berry-luscious time, you reigned as the mighty lord of
+                    strawberries, revered by all. But alas, a bitter twist of fate
+                    stripped you of your powers! Now, the very strawberries you once
+                    ruled see you as a mere mortal and are launching a fruity
+                    rebellion against you. To reclaim your title as the almighty lord
+                    of strawberries, you must devour them to regain your strength and
+                    emerge victorious!
+                  </p>
+                  <h3>Controls:</h3>
+                  <p>
+                    Use the arrow keys to navigate your character. Be cautious,
+                    though; your speed increases rapidly and slows gradually. Your
+                    character seamlessly traverses the screen's edges, so exercise
+                    precision to maintain control.
+                  </p>
+                  <h3>Strawberry Shenanigans:</h3>
+                  <p>
+                    Strawberries of varying sizes emerge from all sides of the screen.
+                    Only munch on those smaller than you to thrive. The closer their
+                    size matches yours, the greater your reward. However, avoid
+                    strawberries larger than you at all costs—they spell your
+                    downfall.
+                    <br />
+                    <br />
+                    Time to gobble up those strawberries and seize your berry kingdom
+                    once more!
+                  </p>
+                </div>
+                <button class="button" onclick="hideInstructions()">Back</button>
+              </section>
+              <div id="gameCanvas"></div>
+            </section>
+          </main>
+          <footer>
+            SDSU Software Development Project 1 - Browser Game.
+          </footer>
         <script src="index.js" async defer></script>
     </body>
 </html>
