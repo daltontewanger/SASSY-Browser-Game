@@ -60,9 +60,6 @@ class BrowserGame extends Phaser.Scene {
   }
 
   create() {
-    createBackground(this);
-    createPlayer(this);
-
     // Sets the boundaries of the game to the edges of the set width and height made from config
     this.physics.world.setBounds(
       0,
@@ -71,13 +68,18 @@ class BrowserGame extends Phaser.Scene {
       this.game.config.height
     );
 
+    createBackground(this);
+    createPlayer(this);
     createAnimation(this);
 
-    /** Use this with debug text in update() to view character speed
-    * Helps when messing with drag factors and max velocity in createPlayer() in create.js
-    */
+    // Group made to handle the objects for spawning, moving, and eventually collision
+    this.objectsGroup = this.physics.add.group();
 
-     /**  this.text = this.add.text(10, 10, "", {
+    /** Use this with debug text in update() to view character speed
+     * Helps when messing with drag factors and max velocity in createPlayer() in create.js
+     */
+
+    /**  this.text = this.add.text(10, 10, "", {
      *  font: "bold 18px Courier",
      *  fill: "red",
      *  });
@@ -85,6 +87,7 @@ class BrowserGame extends Phaser.Scene {
   }
 
   update() {
+    maxObjects(this);
     updatePlayerMove(this);
 
     // Debug text for speed
@@ -92,5 +95,9 @@ class BrowserGame extends Phaser.Scene {
 
     // Allows the player to "wrap" around the bounds of the game by popping up on the opposite side if they hit the edge
     this.physics.world.wrap(this.player, 8);
+  }
+
+  handleObject() {
+    spawnObject(this);
   }
 }
