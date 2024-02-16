@@ -45,6 +45,8 @@ function objectCollision(player, movingObject, scene) {
     scene.score += scoreDelta;
     scene.scoreText.setText(`Score: ${scene.score}`);
   } else {
+    // Reset the score
+    scene.score = 0;
     // Display a "You Lose" message
     const loseText = scene.add.text(
       scene.game.config.width / 2 - 100,
@@ -55,6 +57,29 @@ function objectCollision(player, movingObject, scene) {
         fill: "#ff0000",
       }
     );
+
+    // Makes a restart button to start over
+    const restartButton = scene.add.text(
+        scene.game.config.width / 2 - 60,
+        scene.game.config.height / 2 + 20,
+        "Restart",
+        {
+          font: "24px Arial",
+          fill: "#ffffff",
+          backgroundColor: "#808080",
+          padding: {
+            x: 5,
+            y: 5,
+          },
+        }
+      )
+      .setInteractive();
+
+    // Handle restart button click
+    restartButton.on("pointerdown", () => {
+      scene.scene.restart();
+    });
+
     // Stop the game
     scene.physics.pause();
     scene.time.removeAllEvents();
