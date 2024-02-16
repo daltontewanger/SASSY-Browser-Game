@@ -60,7 +60,7 @@ class BrowserGame extends Phaser.Scene {
       frameHeight: 16,
     });
     this.load.image("object", "assets/strawberry.png");
-    this.load.image("background", "assets/tiles/grass/Grass_04-128x128.png");
+    this.load.image("background", "assets/tiles/Grass/Grass_04-128x128.png");
     this.load.audio("collisionSound", "assets/eat-sound.wav");
   }
 
