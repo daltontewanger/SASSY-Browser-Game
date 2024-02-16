@@ -51,8 +51,34 @@ body {
   margin: 20px;
 }
 
+/* Makes high scores hidden to start and adjusts them to be on the right of the game container */
+#highScoresContainer {
+  flex-direction: column;
+  margin-left: 20px;
+  display: none;
+  position: absolute;
+  top: 50%;
+  left: calc(48% + 420px);
+  transform: translateY(-50%);
+}
+
+#highScoresTitle {
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+#highScoresList {
+  font-size: 20px;
+  color: #333;
+  text-align: left;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
 footer {
-  display: none; 
+  display: none;
   position: fixed;
   bottom: 0;
   width: 100%;

@@ -14,8 +14,22 @@ function hideInstructions() {
   document.getElementById("instructionsContainer").style.display = "none";
 }
 
+function updateHighScores() {
+  const highScoresList = document.getElementById("highScoresList");
+  highScoresList.innerHTML = "";
+  highScores.forEach((score, index) => {
+    const listItem = document.createElement("li");
+    listItem.textContent = `${index + 1}. ${score}`;
+    highScoresList.appendChild(listItem);
+  });
+}
+
 // Function for the "Play Game" button to hide everything but the game container and initiate phaser config
 function startGame() {
+  // Reset high scores
+  highScores = [];
+  updateHighScores();
+
   document
     .getElementById("gameContainer")
     .querySelectorAll(":not(#gameCanvas)")
@@ -131,9 +145,9 @@ class BrowserGame extends Phaser.Scene {
     objectCollision(player, movingObject, this);
   }
   handleYouWon() {
-    youWon(this);
+    youWon(this, highScores);
   }
   handleGameOver() {
-    gameOver(this);
+    gameOver(this, highScores);
   }
 }

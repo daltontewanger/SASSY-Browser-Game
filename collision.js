@@ -14,7 +14,7 @@ function objectCollision(player, movingObject, scene) {
     let ratio = objectSize / playerWidth;
 
     // 3% size increase after each collision with an object that is smaller than the player
-    const growthFactor = .03;
+    const growthFactor = 0.03;
     const newWidth = playerWidth + playerWidth * growthFactor;
     const newHeight = playerHeight + playerHeight * growthFactor;
 
@@ -57,63 +57,102 @@ function objectCollision(player, movingObject, scene) {
 }
 
 // Logic for if the player wins
-function youWon(scene) {
-    // Reset the score
-    scene.score = 0;
-  
-    // Display a "You Are Now the Strawberry Lord Again!" message
-    const winText = scene.add.text(
+function youWon(scene, highScores) {
+  const currentScore = scene.score;
+  const isHighScore = highScores.length < 10 || currentScore > highScores[9];
+
+  if (isHighScore) {
+    // Add the new high score
+    highScores.push(currentScore);
+
+    // Sort high scores
+    highScores.sort((a, b) => b - a);
+
+    // Keep only the top 10 scores
+    highScores = highScores.slice(0, 10);
+
+    // Update UI
+    updateHighScores();
+  }
+
+  // Show high scores container
+  document.getElementById("highScoresContainer").style.display = "flex";
+  // Reset the score
+  scene.score = 0;
+
+  // Display a "You Are Now the Strawberry Lord Again!" message
+  const winText = scene.add.text(
+    scene.game.config.width / 2,
+    scene.game.config.height / 2,
+    "Congratulations, You Are Now the Strawberry Lord Again!",
+    {
+      font: "24px Arial",
+      fill: "#ffffff",
+      backgroundColor: "#000000",
+      padding: {
+        x: 20,
+        y: 20,
+      },
+      align: "center",
+      wordWrap: {
+        width: 300,
+      },
+    }
+  );
+  winText.setOrigin(0.5);
+
+  // Makes a restart button to start over
+  const restartButton = scene.add
+    .text(
       scene.game.config.width / 2,
-      scene.game.config.height / 2,
-      "Congratulations, You Are Now the Strawberry Lord Again!",
+      scene.game.config.height / 2 + winText.height,
+      "Restart",
       {
         font: "24px Arial",
         fill: "#ffffff",
-        backgroundColor: "#000000",
+        backgroundColor: "#808080",
         padding: {
-          x: 20,
-          y: 20,
+          x: 10,
+          y: 5,
         },
-        align: "center",
-        wordWrap: {
-          width: 300,
-        },
+        borderRadius: 5,
       }
-    );
-    winText.setOrigin(0.5);
-  
-    // Makes a restart button to start over
-    const restartButton = scene.add
-      .text(
-        scene.game.config.width / 2,
-        scene.game.config.height / 2 + winText.height,
-        "Restart",
-        {
-          font: "24px Arial",
-          fill: "#ffffff",
-          backgroundColor: "#808080",
-          padding: {
-            x: 10,
-            y: 5,
-          },
-          borderRadius: 5,
-        }
-      )
-      .setInteractive()
-      .setOrigin(0.5);
-  
-    // Handle restart button click
-    restartButton.on("pointerdown", () => {
-      scene.scene.restart();
-    });
-  
-    // Stop the game
-    scene.physics.pause();
-    scene.time.removeAllEvents();
+    )
+    .setInteractive()
+    .setOrigin(0.5);
+
+  // Handle restart button click
+  restartButton.on("pointerdown", () => {
+    scene.scene.restart();
+  });
+
+  // Stop the game
+  scene.physics.pause();
+  scene.time.removeAllEvents();
+}
+
+// Logic for if the player loses
+function gameOver(scene, highScores) {
+  const currentScore = scene.score;
+  const isHighScore = highScores.length < 10 || currentScore > highScores[9];
+
+  if (isHighScore) {
+    // Add the new high score
+    highScores.push(currentScore);
+
+    // Sort high scores
+    highScores.sort((a, b) => b - a);
+
+    // Keep only the top 10 scores
+    highScores = highScores.slice(0, 10);
+
+    // Update UI
+    updateHighScores();
   }
 
-  // Logic for if the player loses
-function gameOver(scene) {
+  // Show high scores container
+  document.getElementById("highScoresContainer").style.display = "flex";
+
   // Reset the score
   scene.score = 0;
   // Display a "You Lose" message
