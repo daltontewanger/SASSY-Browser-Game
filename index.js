@@ -116,6 +116,10 @@ class BrowserGame extends Phaser.Scene {
     // Allows the player to "wrap" around the bounds of the game by popping up on the opposite side if they hit the edge
     this.physics.world.wrap(this.player, 8);
 
+    // Makes the collision bounds based on the size of the current frame (ran into issues with the player collision perimeter and this fixed it)
+    const currentFrame = this.player.anims.currentFrame;
+    this.player.body.setSize(currentFrame.width, currentFrame.height);
+
     // Debug text for speed
     //// this.text.setText(`Speed: ${this.player.body.speed.toFixed(2)}`);
   }
@@ -125,6 +129,9 @@ class BrowserGame extends Phaser.Scene {
   }
   handleCollision(player, movingObject) {
     objectCollision(player, movingObject, this);
+  }
+  handleYouWon() {
+    youWon(this);
   }
   handleGameOver() {
     gameOver(this);

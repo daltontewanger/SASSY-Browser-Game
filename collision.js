@@ -14,7 +14,7 @@ function objectCollision(player, movingObject, scene) {
     let ratio = objectSize / playerWidth;
 
     // 3% size increase after each collision with an object that is smaller than the player
-    const growthFactor = 0.03;
+    const growthFactor = .03;
     const newWidth = playerWidth + playerWidth * growthFactor;
     const newHeight = playerHeight + playerHeight * growthFactor;
 
@@ -45,50 +45,112 @@ function objectCollision(player, movingObject, scene) {
     scene.score += scoreDelta;
     scene.scoreText.setText(`Score: ${scene.score}`);
     scene.sound.play("collisionSound");
+
+    // Make it so if you reach full size you win
+    if (player.displayWidth >= maxWidth && player.displayHeight >= maxHeight) {
+      scene.handleYouWon();
+    }
   } else {
     scene.handleGameOver();
   }
   player.body.setSize(player.displayWidth, player.displayHeight);
 }
 
-function gameOver(scene) {
-
+// Logic for if the player wins
+function youWon(scene) {
     // Reset the score
     scene.score = 0;
-    // Display a "You Lose" message
-    const loseText = scene.add.text(
-      scene.game.config.width / 2 - 100,
-      scene.game.config.height / 2 - 20,
-      "You Lose",
+  
+    // Display a "You Are Now the Strawberry Lord Again!" message
+    const winText = scene.add.text(
+      scene.game.config.width / 2,
+      scene.game.config.height / 2,
+      "Congratulations, You Are Now the Strawberry Lord Again!",
       {
-        font: "32px Arial",
-        fill: "#ff0000",
+        font: "24px Arial",
+        fill: "#ffffff",
+        backgroundColor: "#000000",
+        padding: {
+          x: 20,
+          y: 20,
+        },
+        align: "center",
+        wordWrap: {
+          width: 300,
+        },
       }
     );
-
+    winText.setOrigin(0.5);
+  
     // Makes a restart button to start over
-    const restartButton = scene.add.text(
-        scene.game.config.width / 2 - 60,
-        scene.game.config.height / 2 + 20,
+    const restartButton = scene.add
+      .text(
+        scene.game.config.width / 2,
+        scene.game.config.height / 2 + winText.height,
         "Restart",
         {
           font: "24px Arial",
           fill: "#ffffff",
           backgroundColor: "#808080",
           padding: {
-            x: 5,
+            x: 10,
             y: 5,
           },
+          borderRadius: 5,
         }
       )
-      .setInteractive();
-
+      .setInteractive()
+      .setOrigin(0.5);
+  
     // Handle restart button click
     restartButton.on("pointerdown", () => {
       scene.scene.restart();
     });
-
+  
     // Stop the game
     scene.physics.pause();
     scene.time.removeAllEvents();
   }
+
+  // Logic for if the player loses
+function gameOver(scene) {
+  // Reset the score
+  scene.score = 0;
+  // Display a "You Lose" message
+  const loseText = scene.add.text(
+    scene.game.config.width / 2 - 100,
+    scene.game.config.height / 2 - 20,
+    "You Lose",
+    {
+      font: "32px Arial",
+      fill: "#ff0000",
+    }
+  );
+
+  // Makes a restart button to start over
+  const restartButton = scene.add
+    .text(
+      scene.game.config.width / 2 - 60,
+      scene.game.config.height / 2 + 20,
+      "Restart",
+      {
+        font: "24px Arial",
+        fill: "#ffffff",
+        backgroundColor: "#808080",
+        padding: {
+          x: 5,
+          y: 5,
+        },
+      }
+    )
+    .setInteractive();
+
+  // Handle restart button click
+  restartButton.on("pointerdown", () => {
+    scene.scene.restart();
+  });
+
+  // Stop the game
+  scene.physics.pause();
+  scene.time.removeAllEvents();
+}
