@@ -126,4 +126,7 @@ class BrowserGame extends Phaser.Scene {
   handleCollision(player, movingObject) {
     objectCollision(player, movingObject, this);
   }
+  handleGameOver() {
+    gameOver(this);
+  }
 }

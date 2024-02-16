@@ -46,6 +46,13 @@ function objectCollision(player, movingObject, scene) {
     scene.scoreText.setText(`Score: ${scene.score}`);
     scene.sound.play("collisionSound");
   } else {
+    scene.handleGameOver();
+  }
+  player.body.setSize(player.displayWidth, player.displayHeight);
+}
+
+function gameOver(scene) {
+
     // Reset the score
     scene.score = 0;
     // Display a "You Lose" message
@@ -85,6 +92,3 @@ function objectCollision(player, movingObject, scene) {
     scene.physics.pause();
     scene.time.removeAllEvents();
   }
-
-  player.body.setSize(player.displayWidth, player.displayHeight);
-}
