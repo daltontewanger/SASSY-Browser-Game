@@ -60,7 +60,7 @@ function spawnObject(scene) {
     case 1: // spawns at right and moves left
       x = scene.game.config.width + 50;
       y = Phaser.Math.Between(0, scene.game.config.height);
-      velocityX = Phaser.Math.Between(-100, -50); 
+      velocityX = Phaser.Math.Between(-100, -50);
       break;
     case 2: // spawns at bottom and moves up
       x = Phaser.Math.Between(0, scene.game.config.width);
@@ -87,9 +87,9 @@ function spawnObject(scene) {
   if (velocityY !== undefined) object.setVelocityY(velocityY);
 }
 
- // Check if the number of active objects is less than 10 and spawn a new one, or destroy it if it goes off screen
+// Check if the number of active objects is less than 10 and spawn a new one, or destroy it if it goes off screen
 function maxObjects(scene) {
- if (scene.objectsGroup.countActive(true) < 10) {
+  if (scene.objectsGroup.countActive(true) < 10) {
     scene.handleObject();
   }
 

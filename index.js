@@ -30,7 +30,7 @@ function startGame() {
     physics: {
       default: "arcade",
       arcade: {
-        debug: false,
+        debug: true,
         gravity: { y: 0 },
       },
     },
@@ -44,6 +44,7 @@ function startGame() {
 class BrowserGame extends Phaser.Scene {
   player;
   cursors;
+  text;
   objectsGroup;
   score = 0;
   scoreText;
@@ -96,20 +97,32 @@ class BrowserGame extends Phaser.Scene {
      *  fill: "red",
      *  });
      */
+
+    // Enables collision between the player and objects
+    this.physics.add.collider(
+      this.player,
+      this.objectsGroup,
+      this.handleCollision,
+      null,
+      this
+    );
   }
 
   update() {
     maxObjects(this);
     updatePlayerMove(this);
 
-    // Debug text for speed
-    //// this.text.setText(`Speed: ${this.player.body.speed.toFixed(2)}`);
-
     // Allows the player to "wrap" around the bounds of the game by popping up on the opposite side if they hit the edge
     this.physics.world.wrap(this.player, 8);
+
+    // Debug text for speed
+    //// this.text.setText(`Speed: ${this.player.body.speed.toFixed(2)}`);
   }
 
   handleObject() {
     spawnObject(this);
+  }
+  handleCollision(player, movingObject) {
+    objectCollision(player, movingObject, this);
   }
 }
