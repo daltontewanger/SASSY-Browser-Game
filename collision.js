@@ -44,6 +44,7 @@ function objectCollision(player, movingObject, scene) {
 
     scene.score += scoreDelta;
     scene.scoreText.setText(`Score: ${scene.score}`);
+    scene.sound.play("collisionSound");
   } else {
     // Reset the score
     scene.score = 0;
