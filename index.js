@@ -44,6 +44,9 @@ function startGame() {
 class BrowserGame extends Phaser.Scene {
   player;
   cursors;
+  objectsGroup;
+  score = 0;
+  scoreText;
 
   preload() {
     this.load.atlas(
@@ -71,6 +74,15 @@ class BrowserGame extends Phaser.Scene {
     createBackground(this);
     createPlayer(this);
     createAnimation(this);
+
+    // Adds score to top right of the game
+    this.scoreText = this.add
+      .text(this.game.config.width - 10, 10, `Score: ${this.score}`, {
+        font: "bold 18px Tahoma",
+        fill: "white",
+        align: "right",
+      })
+      .setOrigin(1, 0);
 
     // Group made to handle the objects for spawning, moving, and eventually collision
     this.objectsGroup = this.physics.add.group();
