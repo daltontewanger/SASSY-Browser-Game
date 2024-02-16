@@ -83,6 +83,11 @@ function spawnObject(scene) {
   const object = scene.objectsGroup.create(x, y, "object");
   object.setScale(size / object.displayWidth);
 
+  // Sets object collision perimeter a bit tighter for better visual collision detection
+  const collisionWidth = object.width * 0.8;
+  const collisionHeight = object.height * 0.8;
+  object.body.setSize(collisionWidth, collisionHeight);
+
   if (velocityX !== undefined) object.setVelocityX(velocityX);
   if (velocityY !== undefined) object.setVelocityY(velocityY);
 }
