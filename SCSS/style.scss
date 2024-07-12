@@ -1,0 +1,48 @@
+@use "./config.scss";
+@use './containers.scss';
+@use './utilities.scss';
+
+body {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  background-color: config.$background-color;
+}
+
+#container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@include containers.game-container;
+
+#instructionsContainer {
+  display: none;
+  margin-top: 20px;
+
+  #instructionsText {
+    font-size: 17px;
+    color: config.$text-color;
+    text-align: left;
+    margin: 20px;
+  }
+}
+
+@include containers.high-scores-container;
+
+footer {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  background-color: utilities.lighten-color(config.$border-color, 25%);
+  color: #fff;
+  text-align: center;
+  padding: 10px 0;
+}
+
+@include containers.footer-display(utilities.media-query('min-height', 700px));

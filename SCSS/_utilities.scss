@@ -1,0 +1,7 @@
+@function lighten-color($color, $percentage) {
+  @return lighten($color, $percentage);
+}
+
+@function media-query($feature, $value) {
+  @return "(#{$feature}: #{$value})";
+}

@@ -25,33 +25,32 @@ body {
   border: 2px solid #333;
   margin-right: 20px;
 }
-
-#gameTitle {
+#gameContainer #gameTitle {
   align-self: center;
   font-size: 32px;
   color: #333;
   margin-top: 5px;
 }
-
-.button {
+#gameContainer .button {
   font-size: 24px;
   padding: 10px 20px;
   margin-top: 20px;
+}
+#gameContainer .button:hover {
+  border-color: #ff6347;
 }
 
 #instructionsContainer {
   display: none;
   margin-top: 20px;
 }
-
-#instructionsText {
+#instructionsContainer #instructionsText {
   font-size: 17px;
   color: #333;
   text-align: left;
   margin: 20px;
 }
 
-/* Makes high scores hidden to start and adjusts them to be on the right of the game container */
 #highScoresContainer {
   flex-direction: column;
   margin-left: 20px;
@@ -61,14 +60,12 @@ body {
   left: calc(48% + 420px);
   transform: translateY(-50%);
 }
-
-#highScoresTitle {
+#highScoresContainer #highScoresTitle {
   font-size: 24px;
   color: #333;
   margin-bottom: 10px;
 }
-
-#highScoresList {
+#highScoresContainer #highScoresList {
   font-size: 20px;
   color: #333;
   text-align: left;
@@ -82,15 +79,14 @@ footer {
   position: fixed;
   bottom: 0;
   width: 100%;
-  background-color: #333;
+  background-color: #737373;
   color: #fff;
   text-align: center;
   padding: 10px 0;
 }
 
-/* Only show the footer if the screen height is over 700px so it does not impede with the game container */
 @media (min-height: 700px) {
   footer {
     display: block;
   }
-}
+}/*# sourceMappingURL=style.css.map */

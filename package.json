@@ -1,7 +1,8 @@
 {
   "dependencies": {
     "live-server": "^1.2.2",
-    "phaser": "^3.70.0"
+    "phaser": "^3.70.0",
+    "sass": "^1.77.8"
   },
   "scripts": {
     "start": "live-server --host=localhost --port=3000 --open=index.html"
