@@ -79,6 +79,7 @@ class BrowserGame extends Phaser.Scene {
   }
 
   create() {
+    this.input.addPointer(1);
     // Sets the boundaries of the game to the edges of the set width and height made from config
     this.physics.world.setBounds(
       0,
@@ -90,6 +91,11 @@ class BrowserGame extends Phaser.Scene {
     createBackground(this);
     createPlayer(this);
     createAnimation(this);
+
+    // Register touch events
+    // this.input.on("pointerdown", this.handleTouchStart, this);
+    // this.input.on("pointerup", this.handleTouchEnd, this);
+    // this.input.on("pointermove", this.handleTouchMove, this);
 
     // Adds score to top right of the game
     this.scoreText = this.add
@@ -122,6 +128,27 @@ class BrowserGame extends Phaser.Scene {
       this
     );
   }
+
+  // handleTouchStart(pointer) {
+  //   // Store initial touch position
+  //   this.touchStartX = pointer.x;
+  //   this.touchStartY = pointer.y;
+  // }
+
+  // handleTouchEnd() {
+  //   // Reset movement when touch ends
+  //   this.player.setVelocity(0);
+  // }
+
+  // handleTouchMove(pointer) {
+  //   // Calculate the distance moved from the initial touch position
+  //   const deltaX = pointer.x - this.touchStartX;
+  //   const deltaY = pointer.y - this.touchStartY;
+
+  //   // Adjust player velocity based on touch movement
+  //   this.player.setVelocityX(deltaX * 2); // Adjust multiplier for speed
+  //   this.player.setVelocityY(deltaY * 2); // Adjust multiplier for speed
+  // }
 
   update() {
     maxObjects(this);
